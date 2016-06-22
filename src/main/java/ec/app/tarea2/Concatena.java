@@ -37,6 +37,7 @@ public class Concatena extends GPNode
                      final Problem problem)
         {
 //        System.out.print("Concatenar");
+        parametros par=new parametros();
         CaractSelectData salida = ((CaractSelectData)(input));
         
         children[0].eval(state,thread,input,stack,individual,problem);
@@ -47,11 +48,10 @@ public class Concatena extends GPNode
 //        System.out.print("    Hijo 2: "+salida.features.toString());
         CaractSelectData hijo2=salida.clone();
         for(int feature: hijo1.features){
-            if(!salida.featuresContains(feature)){
+            if(!salida.featuresContains(feature)&&salida.featuresSize()<par.cantidadTotalFeatures){
                 salida.features[salida.featuresSize()]=feature;
             }
         }
-        parametros par = new parametros();
         if(par.printFunciones)System.out.println("Concatenar: "+hijo1.featuresToString()+" | "+hijo2.featuresToString()+" = "+salida.featuresToString());
         }
     }

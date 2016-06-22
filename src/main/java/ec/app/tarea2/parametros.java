@@ -21,6 +21,4 @@ public class parametros {
         largoDataset=690;
         cantidadTotalFeatures=14;
     }
-    
-    
 }
