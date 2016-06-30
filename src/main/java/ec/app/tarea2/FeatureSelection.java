@@ -158,7 +158,7 @@ public class FeatureSelection extends GPProblem implements SimpleProblemForm {
                 int largoFeatures=0;
                 boolean bandera=true;
                 while (bandera){
-                    if(input.features[largoFeatures]!=-1&&largoFeatures<par.cantidadTotalFeatures){
+                    if(input.features[largoFeatures]!=-1&&largoFeatures<(par.cantidadTotalFeatures-1)){
                         largoFeatures++;
                     }else{
                        bandera=false; 
