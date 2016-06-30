@@ -21,16 +21,16 @@ public class parametros {
     int offsetClases;
     public parametros(){
         //Si es true imprime el resultado de las funciones
-        printFunciones=false;
+        printFunciones=true;
         //AUS
-        lambda=0.1f;
-        rutaDataset="AUS.data";
-        largoDataset=250;
-        cantidadTotalFeatures=14;
-        offsetFeatures=0;
-        indiceClasificaciones=14;
-        columnaExtra=1;
-        offsetClases=0;
+//        lambda=0.1f;
+//        rutaDataset="AUS.data";
+//        largoDataset=250;
+//        cantidadTotalFeatures=14;
+//        offsetFeatures=0;
+//        indiceClasificaciones=14;
+//        columnaExtra=1;
+//        offsetClases=0;
         //WBC
 //        lambda=0.1f;
 //        rutaDataset="WBC.data";
@@ -41,14 +41,14 @@ public class parametros {
 //        columnaExtra=0;
 //        offsetClases=0;
         //PIMA
-//        lambda=0.1f;
-//        rutaDataset="PIMA.data";
-//        largoDataset=351;
-//        cantidadTotalFeatures=8;
-//        offsetFeatures=0;
-//        indiceClasificaciones=8;
-//        columnaExtra=1;
-//        offsetClases=0;
+        lambda=0.1f;
+        rutaDataset="PIMA.data";
+        largoDataset=351;
+        cantidadTotalFeatures=8;
+        offsetFeatures=0;
+        indiceClasificaciones=8;
+        columnaExtra=1;
+        offsetClases=0;
         //GC
 //        lambda=0.1f;
 //        rutaDataset="GC.data";

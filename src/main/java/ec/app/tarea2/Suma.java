@@ -67,7 +67,7 @@ public class Suma extends GPNode{
                 }
             }
         }
-        if(par.printFunciones)System.out.println("Suma: "+hijo1.featuresToString()+" + "+hijo2.featuresToString()+" = "+salida.featuresToString());
+//        if(par.printFunciones)System.out.println("Suma: "+hijo1.featuresToString()+" + "+hijo2.featuresToString()+" = "+salida.featuresToString());
 
         
         

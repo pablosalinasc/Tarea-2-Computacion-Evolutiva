@@ -50,6 +50,6 @@ public class Trunca extends GPNode{
             }
         }
         parametros par = new parametros();
-        if(par.printFunciones)System.out.println("Truncar: "+hijo1.featuresToString()+" = "+salida.featuresToString());
+//        if(par.printFunciones)System.out.println("Truncar: "+hijo1.featuresToString()+" = "+salida.featuresToString());
         }
 }

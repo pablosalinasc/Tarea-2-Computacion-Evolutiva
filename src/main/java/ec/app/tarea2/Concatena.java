@@ -52,6 +52,6 @@ public class Concatena extends GPNode
                 salida.features[salida.featuresSize()]=feature;
             }
         }
-        if(par.printFunciones)System.out.println("Concatenar: "+hijo1.featuresToString()+" | "+hijo2.featuresToString()+" = "+salida.featuresToString());
+//        if(par.printFunciones)System.out.println("Concatenar: "+hijo1.featuresToString()+" | "+hijo2.featuresToString()+" = "+salida.featuresToString());
         }
     }

@@ -55,6 +55,6 @@ public class ListaRandom extends GPNode
                 contador++;
             }
         }
-        if(par.printFunciones)System.out.println("Lista Random: "+rd.featuresToString());
+//        if(par.printFunciones)System.out.println("Lista Random: "+rd.featuresToString());
         }
 }

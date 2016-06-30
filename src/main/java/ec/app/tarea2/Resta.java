@@ -70,7 +70,7 @@ public class Resta extends GPNode{
                 }
             }
         }
-        if(par.printFunciones)System.out.println("Resta: "+hijo1.featuresToString()+" - "+hijo2.featuresToString()+" = "+salida.featuresToString());
+//        if(par.printFunciones)System.out.println("Resta: "+hijo1.featuresToString()+" - "+hijo2.featuresToString()+" = "+salida.featuresToString());
         
         
         }

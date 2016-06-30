@@ -165,7 +165,7 @@ public class FeatureSelection extends GPProblem implements SimpleProblemForm {
                     }
                 }
                 
-                float largoRelativo=largoFeatures/par.largoDataset;
+                float largoRelativo=largoFeatures/par.cantidadTotalFeatures;
                 float fitness=1.0f-(float)acc/100-par.lambda*largoRelativo;
                 if(par.printFunciones)System.out.println("Individuo: "+input.featuresToString()+" Precisión: "+acc+"% Fitness: "+fitness+" K: "+largoFeatures);
                 f.setFitness(state,fitness);
