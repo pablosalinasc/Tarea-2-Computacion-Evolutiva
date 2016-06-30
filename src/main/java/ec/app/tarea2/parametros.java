@@ -14,11 +14,60 @@ public class parametros {
     int largoDataset;
     String rutaDataset;
     boolean printFunciones;
+    int offsetFeatures;
+    int indiceClasificaciones;
+    float lambda;
+    int columnaExtra;
+    int offsetClases;
     public parametros(){
-        //AUS
+        //Si es true imprime el resultado de las funciones
         printFunciones=false;
+        //AUS
+        lambda=0.1f;
         rutaDataset="AUS.data";
-        largoDataset=690;
+        largoDataset=250;
         cantidadTotalFeatures=14;
+        offsetFeatures=0;
+        indiceClasificaciones=14;
+        columnaExtra=1;
+        offsetClases=0;
+        //WBC
+//        lambda=0.1f;
+//        rutaDataset="WBC.data";
+//        largoDataset=351;
+//        cantidadTotalFeatures=30;
+//        offsetFeatures=2;
+//        indiceClasificaciones=1;
+//        columnaExtra=0;
+//        offsetClases=0;
+        //PIMA
+//        lambda=0.1f;
+//        rutaDataset="PIMA.data";
+//        largoDataset=351;
+//        cantidadTotalFeatures=8;
+//        offsetFeatures=0;
+//        indiceClasificaciones=8;
+//        columnaExtra=1;
+//        offsetClases=0;
+        //GC
+//        lambda=0.1f;
+//        rutaDataset="GC.data";
+//        largoDataset=351;
+//        cantidadTotalFeatures=24;
+//        offsetFeatures=0;
+//        indiceClasificaciones=24;
+//        columnaExtra=1;
+//        offsetClases=1;
+        //IONO
+//        lambda=0.1f;
+//        rutaDataset="IONO.data";
+//        largoDataset=351;
+//        cantidadTotalFeatures=34;
+//        offsetFeatures=0;
+//        indiceClasificaciones=34;
+//        columnaExtra=1;
+//        offsetClases=0;
+        
+        
     }
 }

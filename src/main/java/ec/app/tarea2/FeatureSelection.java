@@ -63,7 +63,7 @@ public class FeatureSelection extends GPProblem implements SimpleProblemForm {
                 FileReader fr = null;
                 BufferedReader br = null;
 
-                float[][] dataset=new float[par.largoDataset][par.cantidadTotalFeatures+1];
+                float[][] dataset=new float[par.largoDataset][par.cantidadTotalFeatures+par.offsetFeatures+par.columnaExtra];
 
                 try {
                     // Apertura del fichero y creacion de BufferedReader para poder
@@ -75,11 +75,11 @@ public class FeatureSelection extends GPProblem implements SimpleProblemForm {
                     // Lectura del fichero
                     String linea;
                     int indiceLinea=0;
-                    while((linea=br.readLine())!=null){
+                    while((linea=br.readLine())!=null&&par.largoDataset>indiceLinea){
                         //System.out.println(linea);
                         indiceLinea++;
                         String[] parts = linea.split(" ");
-                        for(int i=0;i<parts.length;i++){
+                        for(int i=0;i<(par.cantidadTotalFeatures+par.offsetFeatures+par.columnaExtra);i++){
                             dataset[indiceLinea-1][i]=Float.parseFloat(parts[i]);
                             //System.out.print(dataset[indiceLinea-1][i]+" ");
                         }
@@ -92,11 +92,11 @@ public class FeatureSelection extends GPProblem implements SimpleProblemForm {
                     // En el finally cerramos el fichero, para asegurarnos
                     // que se cierra tanto si todo va bien como si salta 
                     // una excepcion.
-                    try{                    
-                        if( null != fr ){   
+                    try{
+                        if( null != fr ){
                             fr.close();     
                         }                  
-                    }catch (Exception e2){ 
+                    }catch (Exception e2){
                         e2.printStackTrace();
                     }
                 }
@@ -125,41 +125,50 @@ public class FeatureSelection extends GPProblem implements SimpleProblemForm {
                 MutableBinaryClassificationProblemImpl problem= new MutableBinaryClassificationProblemImpl(String.class, par.largoDataset);
                 
                 //obtiene datos del dataset
-                for(int i=0;i<par.largoDataset;i++){
+                for(int i=0;i<(par.largoDataset);i++){
                     float[] lineaTemp=new float[input.featuresSize()];
                     int contador=0;
                     for(int feature:input.features){ //se toman solo las columnas seleccionadas
                         //System.out.println("Fitness: "+feature);
                         if(feature!=-1){
-                            lineaTemp[contador]=dataset[i][feature];
+                            lineaTemp[contador]=dataset[i][feature+par.offsetFeatures];
                             contador++;
                         }
-
                     }
                     SparseVector x1 = generateFeatures(lineaTemp);
-                    problem.addExample(x1, dataset[i][par.cantidadTotalFeatures]); //se le asigna una clasificacion a la tupla
+                    problem.addExample(x1, (dataset[i][par.indiceClasificaciones]-par.offsetClases)); //se le asigna una clasificacion a la tupla
                 }
-
                 BinaryModel model = svm.train(problem, params);
                 int hits = 0;
-                for(int i=0;i<par.largoDataset;i++){
+                for(int i=0;i<(par.largoDataset);i++){
                     float[] lineaTemp=new float[input.featuresSize()];
                     for(int j=0;j<input.featuresSize();j++){ //se toman solo las columnas seleccionadas
                         if(input.features[j]!=-1){
-                            lineaTemp[j]=dataset[i][input.features[j]];
+                            lineaTemp[j]=dataset[i][input.features[j]+par.offsetFeatures];
                         }
                     }
                     SparseVector xTest = generateFeatures(lineaTemp);
                     float predictedLabel =  (float) model.predictLabel(xTest);
-                    if(predictedLabel==dataset[i][par.cantidadTotalFeatures]){
+                    if(predictedLabel==(dataset[i][par.indiceClasificaciones]-par.offsetClases)){
                         hits++;
                     }
                 }
-                acc=hits*100/par.largoDataset;
-                if(par.printFunciones)System.out.println("Individuo: "+input.featuresToString()+" precisión: "+acc+"%");
+                acc=(hits*100)/par.largoDataset;
                 KozaFitness f = ((KozaFitness)ind.fitness);
-                float error=1.0f-(float)acc/100;
-                f.setFitness(state,error);
+                int largoFeatures=0;
+                boolean bandera=true;
+                while (bandera){
+                    if(input.features[largoFeatures]!=-1&&largoFeatures<par.cantidadTotalFeatures){
+                        largoFeatures++;
+                    }else{
+                       bandera=false; 
+                    }
+                }
+                
+                float largoRelativo=largoFeatures/par.largoDataset;
+                float fitness=1.0f-(float)acc/100-par.lambda*largoRelativo;
+                if(par.printFunciones)System.out.println("Individuo: "+input.featuresToString()+" Precisión: "+acc+"% Fitness: "+fitness+" K: "+largoFeatures);
+                f.setFitness(state,fitness);
                 f.hits = hits;
                 ind.evaluated = true;
             }
